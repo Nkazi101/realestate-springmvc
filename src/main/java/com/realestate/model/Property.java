@@ -1,5 +1,7 @@
 package com.realestate.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,7 +34,9 @@ public class Property {
     private String contactInfo;
 
     @Column(name = "datePosted")
-    private String datePosted;
+    private LocalDate datePosted;
+
+
 
     public Integer getId() {
         return id;
@@ -82,11 +86,11 @@ public class Property {
         this.contactInfo = contactInfo;
     }
 
-    public String getDatePosted() {
+    public LocalDate getDatePosted() {
         return datePosted;
     }
 
-    public void setDatePosted(String datePosted) {
+    public void setDatePosted(LocalDate datePosted) {
         this.datePosted = datePosted;
     }
 }

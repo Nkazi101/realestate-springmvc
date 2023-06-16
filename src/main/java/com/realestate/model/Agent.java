@@ -80,10 +80,5 @@ public class Agent {
     public void setId(Integer id) {
         this.id = id;
     }
-
-
-
-
-
     
 }
