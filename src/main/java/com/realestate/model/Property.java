@@ -1,12 +1,17 @@
 package com.realestate.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,6 +22,9 @@ public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "city")
     private String city;
@@ -36,7 +44,38 @@ public class Property {
     @Column(name = "datePosted")
     private LocalDate datePosted;
 
+    @Column(name = "sold", nullable = false )
+    private boolean sold = false;
 
+     @Column(name = "dateSold")
+    private LocalDate dateSold;
+
+    @OneToMany	    
+	@JoinColumn(name="property_Id",referencedColumnName="id")
+	private List<Photo> propertyPhotos;
+	
+
+    // @ManyToMany(mappedBy = "userProperties")
+    // private List<User> users = new ArrayList<>();
+
+
+   public List<Photo> getPropertyPhotos() {
+        return propertyPhotos;
+    }
+
+    public void setPropertyPhotos(List<Photo> propertyPhotos) {
+        this.propertyPhotos = propertyPhotos;
+    }
+
+    public void addPropertyPhoto(Photo photo) {
+		this.propertyPhotos.add(photo);
+	}
+	public void deletePropertyPhoto(Photo photo) {
+		this.propertyPhotos.remove(photo);
+	}
+
+@ManyToMany(mappedBy = "itemsInPortfolio") 
+    private List<Portfolio> portfolios;
 
     public Integer getId() {
         return id;
@@ -93,6 +132,22 @@ public class Property {
     public void setDatePosted(LocalDate datePosted) {
         this.datePosted = datePosted;
     }
+
+    public boolean isSold() {
+        return sold;
+    }
+
+    public void setSold(boolean sold) {
+        this.sold = sold;
+    }
+
+     @Override
+    public String toString() {
+        return "Property [id=" + id + ", datePosted="
+                + datePosted + ", description=" + description + ", price=" + price + ", sold=" + sold
+                + ", size=" + size + ", price=" + price + ", dateSold=" + dateSold + "]";
+    }
+   
 }
 
 

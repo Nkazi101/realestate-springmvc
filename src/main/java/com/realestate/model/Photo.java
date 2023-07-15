@@ -7,17 +7,34 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-@Entity
-@Table(name ="Photo")
-public class Photo {
 
+@Entity
+@Table(name="Photo")
+
+public class Photo {
+    
+
+   
     @Id
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "url")
-    private String photourL;
+    @Column(name = "photoUrl", unique = true)
+    String photoUrl;
 
+    public Photo() {
+    }
 
-    
+    public Integer getId() {
+        return id;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
 }
