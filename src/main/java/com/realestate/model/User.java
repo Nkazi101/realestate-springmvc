@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 
@@ -37,6 +38,10 @@ public class User {
 
     @Column(name = "isAdmin", nullable = false)
     private Boolean isAdmin;
+
+    @OneToOne
+    @JoinColumn(name = "portfolio_id")
+    private Portfolio portfolio;
 
     public User() {}
 

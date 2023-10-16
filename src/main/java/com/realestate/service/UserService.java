@@ -79,5 +79,11 @@ public class UserService {
             throw new RuntimeException("User not found");
         }
     }
+
+    public User addPropertyToUser(Long userId, Property property){
+        User user = userRepository.findById(userId).get();
+        user.getUserProperties().add(property);
+        return userRepository.save(user);
+    }
 }
 

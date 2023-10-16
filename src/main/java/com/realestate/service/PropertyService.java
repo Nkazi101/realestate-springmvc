@@ -13,8 +13,17 @@ import com.realestate.repo.PropertyRepository;
 @Service
 public class PropertyService {
 
+	@Autowired
+	UserService userService;
+
 @Autowired
 private PropertyRepository propertyRepository;
+
+public Property save(Property property, Long id) {
+	Property savedProperty = propertyRepository.save(property);
+	userService.addPropertyToUser(id, savedProperty);
+	return savedProperty;
+}
 
 
 public List<Property> findPropertiesBySize(Double size){
